@@ -87,7 +87,16 @@ app.post("/api/v1/attack", authenticate, (req, res) => {
         }
     })
 })
+app.get("/api/v1/active", authenticate, (req, res) => {
 
+    res.json({
+        success: true,
+        activeAttacks: [],
+        count: 0,
+        maxConcurrent: 5,
+        remainingSlots: 5
+    })
+})
 const PORT = process.env.PORT || 3000
 
 app.listen(PORT, "0.0.0.0", () => {
