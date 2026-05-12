@@ -1,25 +1,18 @@
-from flask import Flask, request, jsonify
-import subprocess
-
-app = Flask(__name__)
-
-@app.route("/")
-def home():
-    return "k6 backend running"
-
 @app.route('/api/v1/loadtest', methods=['POST'])
 def loadtest():
 
     data = request.json
 
-    url = data.get("url")
-    vus = data.get("vus", 5000)
+    ip = data.get("ip")
+    port = data.get("port")
     duration = data.get("duration", "300s")
+    vus = data.get("vus", 5000)
 
     cmd = [
         "k6",
         "run",
-        "--env", f"TARGET_URL={url}",
+        "--env", f"TARGET_IP={ip}",
+        "--env", f"TARGET_PORT={port}",
         "--vus", str(vus),
         "--duration", duration,
         "loadtest.js"
@@ -35,5 +28,3 @@ def loadtest():
         "success": True,
         "output": result.stdout[-3000:]
     })
-
-app.run(host="0.0.0.0", port=8080)
