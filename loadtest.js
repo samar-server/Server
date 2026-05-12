@@ -6,5 +6,11 @@ export const options = {
 };
 
 export default function () {
-  http.get(__ENV.TARGET_URL);
+
+  const ip = __ENV.TARGET_IP;
+  const port = __ENV.TARGET_PORT;
+
+  const url = `http://${ip}:${port}`;
+
+  http.get(url);
 }
