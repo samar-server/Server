@@ -5,8 +5,8 @@ def loadtest():
 
     ip = data.get("ip")
     port = data.get("port")
-    duration = data.get("duration", "300s")
-    vus = data.get("vus", 5000)
+    duration = data.get("duration", "200s")
+    vus = data.get("vus", 500)
 
     cmd = [
         "k6",
